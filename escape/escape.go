@@ -13,7 +13,7 @@ var orderedList = regexp.MustCompile(`(?m)^(\W* {0,3})(\d+)\. `)
 var unorderedList = regexp.MustCompile(`(?m)^([^\\\w]*)[*+-] `)
 var horizontalDivider = regexp.MustCompile(`(?m)^([-*_] *){3,}$`)
 var blockquote = regexp.MustCompile(`(?m)^(\W* {0,3})> `)
-// var link = regexp.MustCompile(`[\[\]]`)
+var link = regexp.MustCompile(`[\[\]]`)
 
 var replacer = strings.NewReplacer(
 	`*`, `\*`,
@@ -55,7 +55,7 @@ func Markdown(text string) string {
 	text = replacer.Replace(text)
 
 	// Escape link brackets
-	// text = link.ReplaceAllString(text, `\$&`)
+	text = link.ReplaceAllString(text, `\$&`)
 
 	return text
 }
